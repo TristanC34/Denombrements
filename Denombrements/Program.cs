@@ -15,15 +15,15 @@ namespace Denombrements
             return int.Parse(Console.ReadLine()); // saisir le nombre et le retourner
         }
         /// <summary>
-        /// Remplace une boucle for calculant la somme de la multiplication d'une valeur partant d'un entier n tendant vers t avec un incrément de 1 à chaque itération
+        /// Remplace une boucle for calculant la somme de la multiplication d'une suite d'entiers, d'une valeur à une autre
         /// </summary>
         /// <param name="t">valeur maximale contenu dans la multiplication</param>
         /// <param name="n">valeur minimale contenu dans la multiplication</param>
         /// <returns>valeur de la multiplication</returns>
         static long Boucle(int t, int n)
         {
-            long r = 1;
-            for (int k = (t - n + 1); k <= t; k++)
+            long r = t;
+            for (int k = (t - 1); k >= n+1; k--)
             {
                 r *= k;
             }
@@ -60,11 +60,7 @@ namespace Denombrements
                 {
                     int n = Ask(messTotal); // nombre total d'éléments à gérer
                     // calcul de r
-                    long r = 1;
-                    for (int k = 1; k <= n; k++)
-                    {
-                        r *= k;
-                    }
+                    long r = Boucle(n, 0);
                     Console.WriteLine(n + "! = " + r);
                 }
                 else if (c == 2)
@@ -72,7 +68,7 @@ namespace Denombrements
                     int t = Ask(messTotal);
                     int n = Ask(messElem); // total du sous ensemble
                     // calcul de r
-                    long r = Boucle(t, n);
+                    long r = Boucle(t, t-n);
                     //Console.WriteLine("résultat = " + (r1 / r2));
                     Console.WriteLine("A(" + t + "/" + n + ") = " + r);
                 }
@@ -81,13 +77,9 @@ namespace Denombrements
                     int t = Ask(messTotal);
                     int n = Ask(messElem);
                     // calcul de r1
-                    long r1 = Boucle(t, n);
+                    long r1 = Boucle(t, t-n);
                     // calcul de r2
-                    long r2 = 1;
-                    for (int k = 1; k <= n; k++)
-                    {
-                        r2 *= k;
-                    }
+                    long r2 = Boucle(n, 0);
                     Console.WriteLine("C(" + t + "/" + n + ") = " + (r1 / r2));
                 }
                 else
